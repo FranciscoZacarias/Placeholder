@@ -7,7 +7,7 @@ internal void entry_point() {
   win32_enable_opengl();
   win32_show_window(true);
 
-  camera_init(&GlobalCamera, vec3f32(0.0f, 5.0f, 10.0f), vec3f32(0.0f, 0.0f, 0.0f));
+  camera_init(&GlobalCamera, vec3f32(0.0f, 5.0f, 10.0f), vec3f32(0.0f, 0.0f, 0.0f), 8.0f, 1.0f);
   renderer_init();
 
   while (win32_application_is_running()) {
