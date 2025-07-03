@@ -1,11 +1,10 @@
 #version 460 core
 
-layout(location = 0) in vec2 in_pos;
-layout(location = 1) in vec4 in_color;
+layout (location = 0) in vec2 Position;
 
-out vec4 v_color;
+out gl_PerVertex { vec4 gl_Position; };
 
 void main() {
-  gl_Position = vec4(in_pos, 0.0, 1.0);
-  v_color     = in_color;
+  vec2 pos = vec2(Position);
+  gl_Position = vec4(pos, 0.0, 1.0);
 }

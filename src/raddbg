@@ -1,0 +1,36 @@
+// raddbg 0.9.20 project file
+
+recent_file: path: "renderer.c"
+recent_file: path: "main.c"
+recent_file: path: "fz_std/win32/fz_win32_window.c"
+recent_file: path: "fz_std/extra/fz_opengl_helper.c"
+recent_file: path: "../../nameless/src/main.c"
+recent_file: path: "../../nameless/src/fz_std/extra/fz_opengl_helper.h"
+recent_file: path: "../../nameless/src/fz_std/extra/fz_opengl_helper.c"
+recent_file: path: "../../nameless/src/fz_std/win32/fz_win32_window.c"
+recent_file: path: "../../../a/_work/1/s/src/vctools/crt/vcstartup/src/startup/exe_common.inl"
+recent_file: path: "fz_std/win32/fz_win32.c"
+recent_file: path: "renderer.h"
+target:
+{
+  executable: "../build/Placeholder.exe"
+  working_directory: "../build/"
+}
+target:
+{
+  executable: "../build/Placeholder.exe"
+  working_directory: "../build/"
+  enabled: 1
+  entry_point: entry_point
+  label: Placeholder
+}
+breakpoint:
+{
+  source_location: "renderer.c:18:7"
+  hit_count: 1
+}
+breakpoint:
+{
+  source_location: "main.c:30:23"
+  hit_count: 1
+}

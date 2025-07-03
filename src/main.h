@@ -1,10 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+
 ///////////////////////
 //~ fz_std
-#define FZ_WINDOW_NAME "Placeholder"
 #include "fz_include.h"
+
+#define ERROR_FILE Str8("D:/work/Placeholder/error.log")
 
 ///////////////////////
 //~ *.h

@@ -12,11 +12,10 @@ Engine:
 [ ] Worldspace font rendering
 [ ] Worldspace line
 
-[ ] Instanced Rendering for quad
-[ ] Batch rendering for quad
-
 fz_lib:
 [ ] Add command line parser and CommandLine struct to application_init()
 [ ] Better way to handle errors than ERROR_MESSAGE_AND_EXIT
 [ ] Only one entry on the program, make the user explicitely call a function if he wants all the setup.
 [ ] Function to get how much memory the process (or whole program) is using.
+[ ] Add button to message box to copy contents to clipboard
+[ ] Add file logging to error messages.
