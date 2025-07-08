@@ -60,8 +60,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     } break;
 
     case WM_DESTROY: {
+    #if 0 // TODO(Fz): check for opengl
       wglMakeCurrent(NULL, NULL);
       wglDeleteContext(_RenderingContextHandle);
+    #endif
       ReleaseDC(hWnd, _DeviceContextHandle);
       PostQuitMessage(0);
       return 0;
@@ -70,6 +72,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
   return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
+// This should be in fz_win32.c/.h
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
   _hInstance = hInstance;
   thread_context_init_and_attach(&MainThreadContext);
@@ -249,15 +252,30 @@ internal void win32_init() {
 }
 
 internal b32 win32_enable_console() {
-  BOOL result = AllocConsole();
-  if (!result) {
-    return false;
+  if (GetConsoleWindow() != NULL) {
+    // Already attached to a console; no need to allocate a new one.
+    return true;
   }
-  FILE* fp;
-  freopen_s(&fp, "CONOUT$", "w", stdout);
-  freopen_s(&fp, "CONOUT$", "w", stderr);
-  _IsTerminalEnabled = true;
-  return true;
+
+  // Try attaching to parent process console.
+  if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+    FILE* fp;
+    freopen_s(&fp, "CONOUT$", "w", stdout);
+    freopen_s(&fp, "CONOUT$", "w", stderr);
+    _IsTerminalEnabled = true;
+    return true;
+  }
+		
+  // No console attached; allocate a new one.
+  if (AllocConsole()) {
+    FILE* fp;
+    freopen_s(&fp, "CONOUT$", "w", stdout);
+    freopen_s(&fp, "CONOUT$", "w", stderr);
+    _IsTerminalEnabled = true;
+    return true;
+  }
+
+  return false;
 }
 
 internal b32 win32_enable_window(s32 width, s32 height) {
@@ -455,22 +473,24 @@ internal void APIENTRY opengl_debug_callback(GLenum source, GLenum type, GLuint 
     case GL_DEBUG_SEVERITY_NOTIFICATION: severity_str = "Notification"; break;
   }
 
-  // Format full message
   char buffer[1024];
-  int n = snprintf(buffer, sizeof(buffer),
-    "OpenGL Debug Message\n"
-    "  Source: %s\n"
-    "  Type: %s\n"
-    "  Severity: %s\n"
-    "  ID: %u\n"
-    "  Message: %.*s\n",
-    source_str, type_str, severity_str, id, length, message);
-
-  if (n > 0) {
-    OutputDebugStringA(buffer);
-    OutputDebugStringA("\n");
-    if (!IsDebuggerPresent()) {
-      fprintf(stderr, "%s\n", buffer);
+  if (severity != GL_DEBUG_SEVERITY_NOTIFICATION) {
+    // Format full message
+    int n = snprintf(buffer, sizeof(buffer),
+      "OpenGL Debug Message\n"
+      "  Source: %s\n"
+      "  Type: %s\n"
+      "  Severity: %s\n"
+      "  ID: %u\n"
+      "  Message: %.*s\n",
+      source_str, type_str, severity_str, id, length, message);
+    
+    if (n > 0) {
+      OutputDebugStringA(buffer);
+      OutputDebugStringA("\n");
+      if (!IsDebuggerPresent()) {
+        fprintf(stderr, "%s\n", buffer);
+      }
     }
   }
 
@@ -559,5 +579,6 @@ internal b32 win32_enable_opengl() {
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
   }
 
+  _IsOpenGLContextEnabled = result;
   return result;
 }

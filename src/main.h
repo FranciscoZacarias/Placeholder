@@ -6,7 +6,7 @@
 //~ fz_std
 #include "fz_include.h"
 
-#define ERROR_FILE Str8("D:/work/Placeholder/error.log")
+#define ERROR_FILE Str8("./Placeholder/error.log")
 
 ///////////////////////
 //~ *.h

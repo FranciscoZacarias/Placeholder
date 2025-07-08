@@ -1,11 +1,10 @@
-Error at D:\work\Placeholder\src\fz_std\extra\fz_opengl_helper.c:30 in opengl_compile_program
-Failed to link Fragment shaderersr: Program Pipeline has no active programs
-
-:/work/Placeholder/src/shaders/fragment_shader.glsl:
-0(7) : error C0000: syntax error, unexpected ';', expecting "::" at token ";"
+Error at C:\Personal\Placeholder\src\fz_std\extra\fz_opengl_helper.c:27 in opengl_compile_program
+Shader link failed for C:/Personal/Placeholder/src/shaders/fragment_shader.glsl: 0(7) : error C0000: syntax error, unexpected ';', expecting "::" at token ";"
 0(9) : error C1013: function "main" is already defined at 0(5)
+0(10) : error C5052: gl_Position is not accessible in this profile
 0(10) : error C1503: undefined variable "Position"
-0(11) : error C5052: gl_Position is not accessible in this profile
+rofile
+l_Position is not accessible in this profile
 
 (10) : error C1503: undefined variable "Position"
 
