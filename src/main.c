@@ -5,7 +5,7 @@ internal void entry_point() {
   win32_init();
   set_error_log_file(Str8("./Placeholder/error.log"));
   win32_enable_window(1280, 720);
-  win32_enable_console();
+  win32_enable_console(true);
   win32_enable_opengl();
   win32_show_window(true);
 
