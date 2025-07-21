@@ -8,9 +8,7 @@
 
 // Font
 #define FONT_INCONSOLATA_OTF   Str8("./fonts/Inconsolata.otf")
-#define FONT_FIRA_MONO_REGULAT Str8("./fonts/FiraMono-Regular.ttf")
-#define FONT_FIRA_MONO_MEDIUM  Str8("./fonts/FiraMono-Medium.ttf")
-#define FONT_FIRA_MONO_BOLD    Str8("./fonts/FiraMono-Bold.ttf")
+#define FONT_INCONSOLATA_OTF   Str8("./fonts/Inconsolata.otf")
 
 // Shader programs
 GLuint WorldspaceProgram;
@@ -32,8 +30,8 @@ typedef struct Renderer {
     GLuint vao;
     GLuint vbo;
 
-	f32 vertices[MAX_QUADS_PER_FRAME * VERTICES_PER_QUAD * COMPONENTS_PER_VERTEX];
-	u32 vertex_count;
+    f32 vertices[MAX_QUADS_PER_FRAME * VERTICES_PER_QUAD * COMPONENTS_PER_VERTEX];
+    u32 vertex_count;
   } quad;
 
 } Renderer;

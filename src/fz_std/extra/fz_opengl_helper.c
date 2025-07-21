@@ -7,10 +7,6 @@ internal GLuint opengl_compile_program(String8 source_path, GLenum kind) {
   if (shader_source.data.size == 0) {
     ERROR_MESSAGE_AND_EXIT("Failed to load shader file: %.*s", (s32)source_path.size, source_path.str);
   }
-  
-  printf("\n------------\n");
-  println_string(shader_source.data);
-  printf("\n------------\n");
 
   // Create and compile shader
   

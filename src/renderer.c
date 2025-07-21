@@ -1,6 +1,5 @@
 internal void renderer_init() {
   AssertNoReentry();
-  opengl_print_context();
   MemoryZeroStruct(&GRenderer);
   GRenderer.arena = arena_init_sized(Megabytes(16), ARENA_COMMIT_SIZE);
   

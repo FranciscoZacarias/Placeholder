@@ -1,6 +1,6 @@
 #include "main.h"
 
-internal void entry_point() {
+internal void entry_point(Command_Line command_line) {
 
   win32_init();
   set_error_log_file(Str8("./Placeholder/error.log"));
